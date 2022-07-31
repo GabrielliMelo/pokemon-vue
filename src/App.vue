@@ -8,24 +8,33 @@
       </ul>
       <img :src="poke.url" />
     </h1>
-
     <!-- card pokemon -->
     <div class="container-list-pokemons">
       <div class="container-cards">
-        <ul class="card-poke" v-for="poke of listPokemons">
-          <li>Nome: {{ poke.name }}</li>
-          <li><img :src="poke.sprites.back_default" /></li>
-          <li>Altura: {{ poke.height }}</li>
-          <li>Peso: {{ poke.weight }}</li>
-          <li>Especie: {{ poke.species.name }}</li>
-        </ul>
+        <nav v-for="pokemon of listPokemons">
+          <card-poke
+            :nome="pokemon.name"
+            :altura="pokemon.height"
+            :peso="pokemon.weight"
+            :especie="pokemon.species.name"
+            :url="pokemon.sprites.back_default"
+            :alt="pokemon.name"
+          >
+          </card-poke>
+        </nav>
       </div>
     </div>
+
+    <!--  -->
   </div>
 </template>
 
 <script>
+import CardPokemon from "./components/shared/CardPoke/CardPoke.vue";
 export default {
+  components: {
+    "card-poke": CardPokemon
+  },
   name: "app",
   data() {
     return {
@@ -65,6 +74,8 @@ export default {
   width: 5%;
 }
 
+/* card */
+
 .container-list-pokemons {
   display: flex;
   justify-content: center;
@@ -77,15 +88,6 @@ export default {
   flex-wrap: wrap;
 }
 
-.card-poke {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 18%;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0);
-  padding: 20px;
-}
 li {
   list-style: none;
 }
