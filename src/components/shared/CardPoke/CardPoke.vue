@@ -15,7 +15,7 @@ export default {
 };
 </script>
 
-<style>
+<style scorped>
 .card-poke {
   display: flex;
   justify-content: center;

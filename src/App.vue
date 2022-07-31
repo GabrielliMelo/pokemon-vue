@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       titulo: "POKEMON",
-      menuHeader: ["Contato", "teste"],
+      menuHeader: ["", ""],
       poke: {
         url:
           "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7"
@@ -60,17 +60,21 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@400;600;700&family=Mouse+Memoirs&family=Nunito:wght@400;600;700&family=Pacifico&family=Roboto+Condensed:ital,wght@1,700&display=swap");
+
 .header-h1 {
   display: flex;
+  font-family: "Mouse Memoirs", sans-serif;
   align-items: center;
   justify-content: space-between;
   padding: 10px 50px;
-  box-shadow: 2px 2px 15px rgb(0, 0, 0);
+  box-shadow: 2px 2px 15px rgb(3, 3, 3);
+  color: rgb(238, 34, 34);
 }
 
 .header-h1 img {
   border-radius: 100px;
-  box-shadow: 2px 2px 18px rgb(255, 0, 0);
+  box-shadow: 2px 2px 18px rgb(102, 0, 0);
   width: 5%;
 }
 
