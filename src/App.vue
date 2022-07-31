@@ -10,13 +10,17 @@
     </h1>
 
     <!-- card pokemon -->
-    <ul class="card-poke" v-for="poke of listPokemons">
-      <li>Nome: {{ poke.name }}</li>
-      <li><img :src="poke.sprites.back_default" /></li>
-      <li>Altura: {{ poke.height }}</li>
-      <li>Peso: {{ poke.weight }}</li>
-      <li>Especie: {{ poke.species.name }}</li>
-    </ul>
+    <div class="container-list-pokemons">
+      <div class="container-cards">
+        <ul class="card-poke" v-for="poke of listPokemons">
+          <li>Nome: {{ poke.name }}</li>
+          <li><img :src="poke.sprites.back_default" /></li>
+          <li>Altura: {{ poke.height }}</li>
+          <li>Peso: {{ poke.weight }}</li>
+          <li>Especie: {{ poke.species.name }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -61,10 +65,26 @@ export default {
   width: 5%;
 }
 
-ul {
+.container-list-pokemons {
   display: flex;
-  justify-content: space-between;
-  width: 15%;
+  justify-content: center;
+}
+
+.container-cards {
+  display: flex;
+  width: 50%;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card-poke {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 18%;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0);
+  padding: 20px;
 }
 li {
   list-style: none;
