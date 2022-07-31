@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <h1 class="header-h1">{{ titulo }} <img :src="poke.url" /></h1>
+    <h1 class="header-h1">
+      {{ titulo }}
+      <ul>
+        <li v-for="menu of menuHeader">{{ menu }}</li>
+      </ul>
+      <img :src="poke.url" />
+    </h1>
   </div>
 </template>
 
@@ -10,6 +16,7 @@ export default {
   data() {
     return {
       titulo: "POKEMON",
+      menuHeader: ["Contato", "teste"],
       poke: {
         url:
           "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7"
@@ -32,5 +39,14 @@ export default {
   border-radius: 100px;
   box-shadow: 2px 2px 18px rgb(255, 0, 0);
   width: 5%;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
+}
+li {
+  list-style: none;
 }
 </style>
