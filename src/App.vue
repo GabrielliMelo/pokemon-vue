@@ -3,15 +3,25 @@
     <!-- Header -->
     <h1 class="header-h1">
       {{ titulo }}
+      {{ filtro }}
       <ul>
         <li v-for="menu of menuHeader">{{ menu }}</li>
       </ul>
       <img :src="poke.url" />
     </h1>
+    <!--  -->
+    <!-- Input -->
+    <input
+      type="search"
+      placeholder="Buscar Pokemon"
+      class="filtro"
+      @input="filtro = $event.target.value"
+    />
+    <!--  -->
     <!-- card pokemon -->
     <div class="container-list-pokemons">
       <div class="container-cards">
-        <nav v-for="pokemon of listPokemons">
+        <nav v-for="pokemon of listaComFiltro">
           <card-poke
             :nome="pokemon.name"
             :altura="pokemon.height"
@@ -24,7 +34,6 @@
         </nav>
       </div>
     </div>
-
     <!--  -->
   </div>
 </template>
@@ -35,7 +44,6 @@ export default {
   components: {
     "card-poke": CardPokemon
   },
-  name: "app",
   data() {
     return {
       titulo: "POKEMON",
@@ -44,7 +52,8 @@ export default {
         url:
           "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7"
       },
-      listPokemons: []
+      listPokemons: [],
+      filtro: ""
     };
   },
   created() {
@@ -55,6 +64,16 @@ export default {
         pokemons => (this.listPokemons = pokemons),
         err => console.log(err)
       );
+  },
+  computed: {
+    listaComFiltro() {
+      if (this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), "i");
+        return this.listPokemons.filter(pokemon => exp.test(pokemon.name));
+      } else {
+        return this.listPokemons;
+      }
+    }
   }
 };
 </script>

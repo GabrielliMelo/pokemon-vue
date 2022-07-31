@@ -1,79 +1,63 @@
 <template>
   <div class="container">
+    <!-- Header -->
+    <h1 class="header-h1">
+      {{ titulo }}
+      <ul>
+        <li v-for="menu of menuHeader">{{ menu }}</li>
+      </ul>
+      <img :src="poke.url" />
+    </h1>
+    <!--  -->
+    <!-- Input -->
     <input
       type="search"
       placeholder="Buscar Pokemon"
       class="filtro"
       @input="filtro = $event.target.value"
     />
+    <!--  -->
   </div>
 </template>
 
 <script>
-export default {
-  components: {},
-
-  data() {
-    return {
-      titulo: "POKEMONS",
-      filtro: "",
-      mensagem: ""
-    };
-  },
-
-  computed: {
-    fotosComFiltro() {
-      if (this.filtro) {
-        let exp = new RegExp(this.filtro.trim(), "i");
-        return this.fotos.filter(foto => exp.test(foto.titulo));
-      } else {
-        return this.fotos;
-      }
-    }
-  },
-
-  methods: {
-    remove(foto) {
-      this.service.apaga(foto._id).then(
-        () => {
-          let indice = this.fotos.indexOf(foto);
-          this.fotos.splice(indice, 1);
-          this.mensagem = "Foto removida com sucesso";
-        },
-        err => {
-          console.log(err);
-          this.mensagem = "Não foi possível remover a foto";
-        }
-      );
-    }
-  },
-
-  created() {
-    this.service = new FotoService(this.$resource);
-
-    this.service.lista().then(
-      fotos => (this.fotos = fotos),
-      err => (this.mensagem = err.message)
-    );
-  }
-};
+export default {};
 </script>
 
 <style>
-.centralizado {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@400;600;700&family=Mouse+Memoirs&family=Nunito:wght@400;600;700&family=Pacifico&family=Roboto+Condensed:ital,wght@1,700&display=swap");
+
+.header-h1 {
+  display: flex;
+  font-family: "Mouse Memoirs", sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 50px;
+  box-shadow: 2px 2px 15px rgb(3, 3, 3);
+  color: rgb(238, 34, 34);
 }
 
-.lista-fotos {
+.header-h1 img {
+  border-radius: 100px;
+  box-shadow: 2px 2px 18px rgb(102, 0, 0);
+  width: 5%;
+}
+
+/* card */
+
+.container-list-pokemons {
+  display: flex;
+  justify-content: center;
+}
+
+.container-cards {
+  display: flex;
+  width: 50%;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+li {
   list-style: none;
-}
-
-.lista-fotos .lista-fotos-item {
-  display: inline-block;
-}
-
-.filtro {
-  display: block;
-  width: 100%;
 }
 </style>
