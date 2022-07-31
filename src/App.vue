@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- Header -->
     <h1 class="header-h1">
       {{ titulo }}
       <ul>
@@ -7,6 +8,15 @@
       </ul>
       <img :src="poke.url" />
     </h1>
+
+    <!-- card pokemon -->
+    <ul class="card-poke" v-for="poke of listPokemons">
+      <li>Nome: {{ poke.name }}</li>
+      <li><img :src="poke.sprites.back_default" /></li>
+      <li>Altura: {{ poke.height }}</li>
+      <li>Peso: {{ poke.weight }}</li>
+      <li>Especie: {{ poke.species.name }}</li>
+    </ul>
   </div>
 </template>
 
@@ -20,8 +30,18 @@ export default {
       poke: {
         url:
           "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7"
-      }
+      },
+      listPokemons: []
     };
+  },
+  created() {
+    this.$http
+      .get("https://back-pokemon-simbiox.herokuapp.com/pokemons?limit=10page=1")
+      .then(res => res.json())
+      .then(
+        pokemons => (this.listPokemons = pokemons),
+        err => console.log(err)
+      );
   }
 };
 </script>
