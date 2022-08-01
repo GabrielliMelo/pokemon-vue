@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import CardPokemon from "./shared/CardPoke/CardPoke.vue";
-import ModalPoke from "./shared/ModalPoke/ModalPoke.vue";
+import CardPokemon from "../shared/CardPoke/CardPoke.vue";
+import ModalPoke from "../shared/ModalPoke/ModalPoke.vue";
 
 export default {
   components: {
