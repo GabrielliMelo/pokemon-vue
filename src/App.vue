@@ -41,12 +41,11 @@
     <!--  -->
     <!-- Modal -->
     <modal-poke
-      nome="pokemon.name"
-      altura="pokemon.height"
-      peso="pokemon.weight"
-      especie="pokemon.species.name"
-      url="listaComFiltro[0].sprites.back_default"
-      alt="pokemon.name"
+      :nome="pokemon.name"
+      :altura="pokemon.height"
+      :peso="pokemon.weight"
+      :especie="pokemon.name"
+      :url="poke.url"
       :visivel="visivel"
     ></modal-poke>
 
@@ -72,8 +71,10 @@ export default {
       },
       listPokemons: [],
       filtro: "",
-      pokemon: {},
-      visivel: true
+      pokemon: {
+        name: "ditto"
+      },
+      visivel: false
     };
   },
   created() {
@@ -100,6 +101,7 @@ export default {
         let exp = new RegExp(this.filtro.trim(), "i");
         return this.listPokemons.filter(pokemon => exp.test(pokemon.name));
       } else {
+        this.visivel = false;
         return this.listPokemons;
       }
     }
@@ -115,7 +117,7 @@ export default {
           .then(
             pokemon => {
               this.pokemon = pokemon;
-              console.log(pokemon);
+              this.visivel = true;
             },
             err => console.log(err)
           );
