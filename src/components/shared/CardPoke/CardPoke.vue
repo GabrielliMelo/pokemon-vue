@@ -24,5 +24,6 @@ export default {
   min-width: 60%;
   box-shadow: 2px 2px 15px rgb(0, 0, 0);
   padding: 20px;
+  font-size: 1.3rem;
 }
 </style>
