@@ -24,7 +24,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@400;600;700&family=Mouse+Memoirs&family=Nunito:wght@400;600;700&family=Pacifico&family=Roboto+Condensed:ital,wght@1,700&display=swap");
 
 .header-h1 {

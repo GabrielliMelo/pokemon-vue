@@ -3,7 +3,7 @@
     <!-- Header -->
     <h1 class="header-h1">
       {{ titulo }}
-      {{ filtro }}
+      {{ page }}
       <ul>
         <li v-for="menu of menuHeader">{{ menu }}</li>
       </ul>
@@ -11,7 +11,7 @@
     </h1>
     <!--  -->
     <!-- Input -->
-    <div>
+    <div class="input">
       <input
         type="search"
         placeholder="Buscar Pokemon"
@@ -19,6 +19,10 @@
         @input="filtro = $event.target.value"
       />
       <button @click="buscar()">Buscar</button>
+      <div class="filtro-name" v-if="filtro.length > 0">
+        Buscar --> {{ filtro }}
+      </div>
+      <button @click="voltar()" v-if="filtro.length > 0">Voltar</button>
     </div>
 
     <!--  -->
@@ -39,23 +43,33 @@
       </div>
     </div>
     <!--  -->
-    <!-- Modal -->
-    <modal-poke
-      :nome="pokemon.name"
-      :altura="pokemon.height"
-      :peso="pokemon.weight"
-      :especie="pokemon.name"
-      :url="poke.url"
-      :visivel="visivel"
-    ></modal-poke>
+    <!-- modal -->
+    <transition name="modal">
+      <modal-poke
+        :nome="pokemon.name"
+        :altura="pokemon.height"
+        :peso="pokemon.weight"
+        :especie="pokemon.name"
+        :url="poke.url"
+        :visivel="visivel"
+      ></modal-poke>
+    </transition>
 
     <!--  -->
+
+    <div class="input" v-if="filtro.length == 0">
+      <button @click="prevPage()">Anterior</button>
+      <button @click="nextPage()">
+        Proxima
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import CardPokemon from "./components/shared/CardPoke/CardPoke.vue";
 import ModalPoke from "./components/shared/ModalPoke/ModalPoke.vue";
+
 export default {
   components: {
     "card-poke": CardPokemon,
@@ -74,25 +88,15 @@ export default {
       pokemon: {
         name: "ditto"
       },
-      visivel: false
+      visivel: false,
+      page: 1
     };
   },
   created() {
     {
       if (!this.filtro) {
-        this.$http
-          .get(
-            "https://back-pokemon-simbiox.herokuapp.com/pokemons?limit=10page=1"
-          )
-          .then(res => res.json())
-          .then(
-            pokemons => (this.listPokemons = pokemons),
-            err => console.log(err)
-          );
+        this.paginacaoPokemons(this.page);
       }
-    }
-    {
-      console.log(this.pokemon);
     }
   },
   computed: {
@@ -122,6 +126,34 @@ export default {
             err => console.log(err)
           );
       }
+    },
+    paginacaoPokemons(pagina) {
+      if (!this.filtro) {
+        this.$http
+          .get(
+            `https://back-pokemon-simbiox.herokuapp.com/pokemons?limit=10&page=${pagina}`
+          )
+          .then(res => res.json())
+          .then(
+            pokemons => (this.listPokemons = pokemons),
+
+            err => console.log(err)
+          );
+      }
+    },
+    nextPage() {
+      this.page += 1;
+      this.paginacaoPokemons(this.page);
+    },
+    prevPage() {
+      if (this.page === 1) {
+        return;
+      }
+      this.page -= 1;
+      this.paginacaoPokemons(this.page);
+    },
+    voltar() {
+      this.filtro = "";
     }
   }
 };
@@ -137,8 +169,9 @@ body {
   font-family: "Mouse Memoirs", sans-serif;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid gray;
   padding: 10px 50px;
-  box-shadow: 2px 2px 15px rgb(3, 3, 3);
+  box-shadow: 3px 3px 10px rgb(0, 0, 0);
   color: rgb(238, 34, 34);
 }
 
@@ -164,5 +197,20 @@ body {
 
 li {
   list-style: none;
+}
+.input {
+  text-align: center;
+  padding: 50px;
+}
+button {
+  padding: 10px;
+}
+.filtro {
+  padding: 10px;
+}
+.filtro-name {
+  padding: 30px;
+  font-size: 3.9rem;
+  color: rgb(255, 0, 0);
 }
 </style>
