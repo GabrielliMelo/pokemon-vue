@@ -1,6 +1,8 @@
 <template>
   <nav class="card-poke" @dblclick="visivel = !visivel">
-    <span>Nome: {{ nome }} <span v-show="visivel">&#128149;</span></span>
+    <span class="favorito"
+      >Nome: {{ nome }} <span v-show="visivel">&#128149;</span>
+    </span>
     <slot></slot>
     <img :src="url" :alt="alt" />
     <span>Altura: {{ altura }}</span>
@@ -30,5 +32,13 @@ export default {
   box-shadow: 2px 2px 15px rgb(0, 0, 0);
   padding: 20px;
   font-size: 1.3rem;
+  position: relative;
+}
+
+.favorito span {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 2rem;
 }
 </style>
