@@ -1,6 +1,6 @@
 <template>
-  <nav class="card-poke">
-    <span>Nome: {{ nome }}</span>
+  <nav class="card-poke" @dblclick="visivel = !visivel">
+    <span>Nome: {{ nome }} <span v-show="visivel">&#128149;</span></span>
     <slot></slot>
     <img :src="url" :alt="alt" />
     <span>Altura: {{ altura }}</span>
@@ -12,6 +12,11 @@
 <script>
 export default {
   props: ["nome", "altura", "especie", "peso", "url", "alt"],
+  data() {
+    return {
+      visivel: false,
+    };
+  },
 };
 </script>
 
@@ -21,7 +26,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  min-width: 60%;
+  width: 220px;
   box-shadow: 2px 2px 15px rgb(0, 0, 0);
   padding: 20px;
   font-size: 1.3rem;

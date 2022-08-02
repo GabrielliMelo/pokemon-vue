@@ -3,7 +3,6 @@
     <!-- Header -->
     <h1 class="header-h1">
       {{ titulo }}
-      {{ page }}
       <ul>
         <li v-for="menu of menuHeader">{{ menu }}</li>
       </ul>
@@ -18,11 +17,11 @@
         class="filtro"
         @input="filtro = $event.target.value"
       />
-      <button @click="buscar()">Buscar</button>
       <div class="filtro-name" v-if="filtro.length > 0">
         Buscar --> {{ filtro }}
       </div>
       <button @click="voltar()" v-if="filtro.length > 0">Voltar</button>
+      <button @click="buscar()">Buscar</button>
     </div>
 
     <!--  -->
@@ -59,6 +58,8 @@
 
     <div class="input" v-if="filtro.length == 0">
       <button @click="prevPage()">Anterior</button>
+
+      <button>Pagina {{ page }}</button>
       <button @click="nextPage()">
         Proxima
       </button>
