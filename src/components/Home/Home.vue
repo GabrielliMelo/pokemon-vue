@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <!-- Header -->
-
+    <header-poke></header-poke>
     <!--  -->
     <!-- Input -->
     <div class="input">
@@ -62,11 +62,13 @@
 <script>
 import CardPokemon from "../shared/CardPoke/CardPoke.vue";
 import ModalPoke from "../shared/ModalPoke/ModalPoke.vue";
+import Header from "../shared/Header/Header.vue";
 
 export default {
   components: {
     "card-poke": CardPokemon,
     "modal-poke": ModalPoke,
+    "header-poke": Header,
   },
   data() {
     return {
