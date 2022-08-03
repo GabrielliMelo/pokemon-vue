@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <button @click="voltar()" v-if="filtro.length > 0">Voltar</button>
+    <button><router-link :to="{ name: 'home' }">Voltar</router-link></button>
   </div>
 </template>
 

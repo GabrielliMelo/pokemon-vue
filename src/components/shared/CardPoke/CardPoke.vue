@@ -8,6 +8,9 @@
     <span>Altura: {{ altura }}</span>
     <span>Peso: {{ peso }}</span>
     <span>Especie: {{ especie }}</span>
+    <router-link :to="{ name: 'pokemon', params: { poke: nome } }"
+      >informações</router-link
+    >
   </nav>
 </template>
 
@@ -40,5 +43,8 @@ export default {
   right: 15px;
   top: 10px;
   font-size: 2rem;
+}
+a {
+  color: rgb(0, 0, 250);
 }
 </style>
