@@ -1,13 +1,7 @@
 <template>
   <div id="container">
     <!-- Header -->
-    <h1 class="header-h1">
-      {{ titulo }}
-      <ul>
-        <li v-for="menu of menuHeader">{{ menu }}</li>
-      </ul>
-      <img :src="poke.url" />
-    </h1>
+
     <!--  -->
     <!-- Input -->
     <div class="input">
@@ -60,9 +54,7 @@
       <button @click="prevPage()">Anterior</button>
 
       <button>Pagina {{ page }}</button>
-      <button @click="nextPage()">
-        Proxima
-      </button>
+      <button @click="nextPage()">Proxima</button>
     </div>
   </div>
 </template>
@@ -74,23 +66,22 @@ import ModalPoke from "../shared/ModalPoke/ModalPoke.vue";
 export default {
   components: {
     "card-poke": CardPokemon,
-    "modal-poke": ModalPoke
+    "modal-poke": ModalPoke,
   },
   data() {
     return {
       titulo: "POKEMON",
       menuHeader: ["", ""],
       poke: {
-        url:
-          "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7"
+        url: "https://th.bing.com/th/id/OIP.Q-3Vql8N5_QQ9eODJvS5TAHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7",
       },
       listPokemons: [],
       filtro: "",
       pokemon: {
-        name: "ditto"
+        name: "ditto",
       },
       visivel: false,
-      page: 1
+      page: 1,
     };
   },
   created() {
@@ -104,12 +95,12 @@ export default {
     listaComFiltro() {
       if (this.filtro) {
         let exp = new RegExp(this.filtro.trim(), "i");
-        return this.listPokemons.filter(pokemon => exp.test(pokemon.name));
+        return this.listPokemons.filter((pokemon) => exp.test(pokemon.name));
       } else {
         this.visivel = false;
         return this.listPokemons;
       }
-    }
+    },
   },
   methods: {
     buscar() {
@@ -118,13 +109,13 @@ export default {
           .get(
             `https://back-pokemon-simbiox.herokuapp.com/pokemons/${this.filtro}`
           )
-          .then(res => res.json())
+          .then((res) => res.json())
           .then(
-            pokemon => {
+            (pokemon) => {
               this.pokemon = pokemon;
               this.visivel = true;
             },
-            err => console.log(err)
+            (err) => console.log(err)
           );
       }
     },
@@ -134,11 +125,11 @@ export default {
           .get(
             `https://back-pokemon-simbiox.herokuapp.com/pokemons?limit=10&page=${pagina}`
           )
-          .then(res => res.json())
+          .then((res) => res.json())
           .then(
-            pokemons => (this.listPokemons = pokemons),
+            (pokemons) => (this.listPokemons = pokemons),
 
-            err => console.log(err)
+            (err) => console.log(err)
           );
       }
     },
@@ -155,8 +146,8 @@ export default {
     },
     voltar() {
       this.filtro = "";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -164,22 +155,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@400;600;700&family=Mouse+Memoirs&family=Nunito:wght@400;600;700&family=Pacifico&family=Roboto+Condensed:ital,wght@1,700&display=swap");
 body {
   font-family: "Mouse Memoirs", sans-serif;
-}
-.header-h1 {
-  display: flex;
-  font-family: "Mouse Memoirs", sans-serif;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid gray;
-  padding: 10px 50px;
-  box-shadow: 3px 3px 10px rgb(0, 0, 0);
-  color: rgb(238, 34, 34);
-}
-
-.header-h1 img {
-  border-radius: 100px;
-  box-shadow: 2px 2px 18px rgb(102, 0, 0);
-  width: 5%;
 }
 
 /* card */
