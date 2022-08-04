@@ -1,8 +1,27 @@
 <template>
   <div id="container">
     <header-poke></header-poke>
-
-    <button><router-link :to="{ name: 'home' }">Voltar</router-link></button>
+    <div class="container-pokemon">
+      <div class="info-poke">
+        <ul class="header-table table">
+          <li>Nome</li>
+          <li>Imagem</li>
+          <li>Altura</li>
+          <li>Peso</li>
+          <li>Especie</li>
+        </ul>
+        <ul class="table-line table">
+          <li>{{ pokemon.name }}</li>
+          <li><img :src="pokemon.sprites.back_default" /></li>
+          <li>{{ pokemon.height }}m</li>
+          <li>{{ pokemon.weight }}kg</li>
+          <li>{{ pokemon.species.name }}</li>
+        </ul>
+      </div>
+    </div>
+    <button>
+      <router-link :to="{ name: 'home' }">Pagina principal</router-link>
+    </button>
   </div>
 </template>
 
@@ -40,5 +59,33 @@ export default {
   min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.info-poke {
+  width: 50%;
+}
+
+.container-pokemon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.table {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(27, 228, 218, 0.8);
+  padding: 10px 15px;
+}
+.table li {
+  min-width: 10%;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.table-line {
 }
 </style>
