@@ -36,6 +36,11 @@ export default {
   padding: 20px;
   font-size: 1.3rem;
   position: relative;
+  background: rgba(115, 200, 233, 0.85);
+}
+
+.card-poke img {
+  width: 120px;
 }
 
 .favorito span {
@@ -45,6 +50,6 @@ export default {
   font-size: 2rem;
 }
 a {
-  color: rgb(0, 0, 250);
+  color: rgb(196, 23, 129);
 }
 </style>

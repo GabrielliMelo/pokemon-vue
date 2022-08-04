@@ -26,6 +26,7 @@ export default {
 .header-h1 {
   display: flex;
   font-family: "Mouse Memoirs", sans-serif;
+  font-size: 3.5rem;
   align-items: center;
   justify-content: space-between;
   border: 1px solid gray;
